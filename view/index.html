@@ -3,7 +3,7 @@
         <title>House of cards</title>
         <style>
         
-            button {
+            .button {
                 font-weight: bold;
                 background-color: blue;
                 border: solid 3px #0000b4;
@@ -12,17 +12,98 @@
                 border-radius: 5px;
             }
             
+            .player {
+                float:left;
+                background-color: #c1c1c1;
+                margin: 0 10px;
+                padding: 0 25px;
+                border-radius: 5px;
+                border: 1px solid black;
+            }
+            
+            .table {
+                background-color: #28d928;
+                width: 303px;
+                margin: 10px;
+                padding: 0 25px;
+                border-radius: 5px;
+                border: 1px solid black;
+            }
+            
         </style>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     </head>
     <body>
         <button id="showDeck">Show Deck</button>
         <button id="shuffleDeck">Shuffle Deck</button>
-        <button id="drawCard">Draw 7 Cards</button>
         <button id="resetDeck">Restart Deck</button>
+        <button id="newGame">New Game</button>
+        <br/>
+        <div class="table">
+            <h1>Table:</h1>
+            <div id="table"></div>
+        </div>
+        <div class="player">
+            <h1>Player1:</h1>
+            <div id="player1"></div>
+        </div>
+        <div class="player">
+            <h1>Player2:</h1>
+            <div id="player2"></div>
+        </div>
     </body>
     <script>
-                
+        
+        $("#shuffleDeck").click(shuffle);
+        $("#resetDeck").click(resetDeck);
+        $("#newGame").click(newGame)
+        
+        function newGame(){ 
+            resetDeck();
+            shuffle();
+            $.ajax({
+                type: "GET",
+                url: "/draw/5",
+                dataType: "json",
+                success: function(result){
+                    let tableCards = "";
+                    for(let i in result){
+                        console.log(result[i]);
+                        tableCards += result[i]["name"] + " ";
+                    }
+                    $("#table").html(tableCards)
+                }
+            });
+
+            $.ajax({
+                type: "GET",
+                url: "/draw/2",
+                dataType: "json",
+                success: function(result){
+                    let player1cards = "";
+                    for(let i in result){
+                        console.log(result[i]);
+                        player1cards += result[i]["name"] + " ";
+                    }
+                    $("#player1").html(player1cards)
+                }
+            });
+
+            $.ajax({
+                type: "GET",
+                url: "/draw/2",
+                dataType: "json",
+                success: function(result){
+                    let player2cards = "";
+                    for(let i in result){
+                        console.log(result[i]);
+                        player2cards += result[i]["name"] + " ";
+                    }
+                    $("#player2").html(player2cards)
+                }
+            });
+        }
+        
         $("#showDeck").click(function(){
             $.ajax({
                 type: "GET",
@@ -33,27 +114,18 @@
             })
         });
         
-        $("#shuffleDeck").click(function(){
+        function shuffle(){
             $.ajax({
                 type: "GET",
                 url: "/shuffle",
                 success: function(result){
                     console.log(result);
                 }
-            })
-        });
+            });
+        };
+                
         
-        $("#drawCard").click(function(){
-            $.ajax({
-                type: "GET",
-                url: "/draw/7",
-                success: function(result){
-                    console.log(result);
-                }
-            })
-        });
-        
-        $("#resetDeck").click(function(){
+        function resetDeck(){
             $.ajax({
                 type: "GET",
                 url: "/resetDeck",
@@ -61,6 +133,6 @@
                     console.log(result);
                 }
             })
-        });
+        }
     </script>
 </html>
