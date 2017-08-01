@@ -23,4 +23,15 @@
         </div>
     </body>
     <script type="text/javascript" src="script.js"></script>
+    <script>
+        $.ajax({
+            type: "POST",
+            dataType: "json",
+            url: "/ranking",
+            data: {cards: [1, 2, 3, 4]},
+            success: function(response){
+                console.log(response);
+            }
+        });
+    </script>
 </html>

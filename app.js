@@ -1,16 +1,18 @@
-var express = require('express');
-var app = express();
+let express = require('express');
+let bodyParser = require('body-parser');
+let app = express();
 
-var shuffle = require('./app/shuffle');
-var cards = require('./app/deck');
+let shuffle = require('./app/shuffle');
+let cards = require('./app/deck');
 
-var deck = {
+let deck = {
     shuffled: false,
     cards: cards(),
     cardsLeft: 52
 };
 
 app.use(express.static('view'));
+app.use(bodyParser.urlencoded({extended: true}));
 
 app.get('/', function(req, res){
     res.sendFile(__dirname + '/view/index.html');
@@ -35,7 +37,11 @@ app.get('/showDeck', function(req, res){
 app.get('/draw', function(req, res){
     res.send(deck.cards.pop());
     deck.cardsLeft = deck.cards.length;
-})
+});
+
+app.post('/ranking', function(req, res){
+    res.send(req.body)
+});
 
 app.get('/draw/:number', function(req, res){
     let numToDraw = req.params.number
