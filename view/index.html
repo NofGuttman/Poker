@@ -1,0 +1,66 @@
+<html>
+    <head>
+        <title>House of cards</title>
+        <style>
+        
+            button {
+                font-weight: bold;
+                background-color: blue;
+                border: solid 3px #0000b4;
+                color: white;
+                padding: 10px;
+                border-radius: 5px;
+            }
+            
+        </style>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    </head>
+    <body>
+        <button id="showDeck">Show Deck</button>
+        <button id="shuffleDeck">Shuffle Deck</button>
+        <button id="drawCard">Draw 7 Cards</button>
+        <button id="resetDeck">Restart Deck</button>
+    </body>
+    <script>
+                
+        $("#showDeck").click(function(){
+            $.ajax({
+                type: "GET",
+                url: "/showDeck",
+                success: function(result){
+                    console.log(result);
+                }
+            })
+        });
+        
+        $("#shuffleDeck").click(function(){
+            $.ajax({
+                type: "GET",
+                url: "/shuffle",
+                success: function(result){
+                    console.log(result);
+                }
+            })
+        });
+        
+        $("#drawCard").click(function(){
+            $.ajax({
+                type: "GET",
+                url: "/draw/7",
+                success: function(result){
+                    console.log(result);
+                }
+            })
+        });
+        
+        $("#resetDeck").click(function(){
+            $.ajax({
+                type: "GET",
+                url: "/resetDeck",
+                success: function(result){
+                    console.log(result);
+                }
+            })
+        });
+    </script>
+</html>
