@@ -2,7 +2,10 @@ $("#shuffleDeck").click(shuffle);
 $("#resetDeck").click(resetDeck);
 $("#newGame").click(newGame);
 
-function newGame(){ 
+let table = [];
+let player1hand = []
+
+function newGame(){
     resetDeck();
     shuffle();
     $.ajax({
@@ -12,9 +15,10 @@ function newGame(){
         success: function(result){
             let tableCards = "";
             for(let i in result){
-                console.log(result[i]);
+                table.push(result[i]);
                 tableCards += result[i]["name"] + " ";
             }
+            console.log(table);
             $("#table").html(tableCards)
         }
     });
@@ -26,13 +30,14 @@ function newGame(){
         success: function(result){
             let player1cards = "";
             for(let i in result){
-                console.log(result[i]);
+                player1hand.push(result[i]);
                 player1cards += result[i]["name"] + " ";
             }
-            $("#player1").html(player1cards)
+            console.log(player1hand);
+            $("#player1").html(player1cards);
         }
     });
-
+    
     $.ajax({
         type: "GET",
         url: "/draw/2",
@@ -49,6 +54,7 @@ function newGame(){
 }
 
 $("#showDeck").click(function(){
+    rank(player1hand.concat(table));
     $.ajax({
         type: "GET",
         url: "/showDeck",
@@ -77,4 +83,16 @@ function resetDeck(){
             console.log(result);
         }
     })
+}
+
+function rank(cards){
+    $.ajax({
+        type: "POST",
+        dataType: "json",
+        url: "/ranking",
+        data: {cards: cards},
+        success: function(result){
+            console.log(result);
+        }
+    });
 }

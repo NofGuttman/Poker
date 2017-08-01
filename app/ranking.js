@@ -348,7 +348,7 @@ function showMeWhatYouGot(cards){
     if(isStraight(cards)) return isStraight(cards);             // [4, highest card]
     if(isThreeOfaKind(cards)) return isThreeOfaKind(cards);     // [3, Threesome, highest cards...]
     if(isTwoPairs(cards)) return isTwoPairs(cards);             // [2, Higher pair, Lower pair, Highest card]
-    if(isOnePair(cards)) return isOnePair(cards);               // [1, Pair, highest cards...]
+    if(isOnePair(cards)) return isOnePair(cards);               // [1, Pair, highest cards...] BUG IN HERE! please fix.
     return isNothing(cards);                                    // [0, highest cards...]
 }
 

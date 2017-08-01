@@ -1,6 +1,7 @@
 let express = require('express');
 let bodyParser = require('body-parser');
 let app = express();
+let ranking = require('./app/ranking');
 
 let shuffle = require('./app/shuffle');
 let cards = require('./app/deck');
@@ -40,7 +41,7 @@ app.get('/draw', function(req, res){
 });
 
 app.post('/ranking', function(req, res){
-    res.send(req.body)
+    res.send(ranking(req.body.cards));
 });
 
 app.get('/draw/:number', function(req, res){
