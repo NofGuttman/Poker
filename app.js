@@ -10,6 +10,8 @@ var deck = {
     cardsLeft: 52
 };
 
+app.use(express.static('view'));
+
 app.get('/', function(req, res){
     res.sendFile(__dirname + '/view/index.html');
 });
