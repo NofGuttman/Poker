@@ -3,7 +3,7 @@ $("#resetDeck").click(resetDeck);
 $("#newGame").click(newGame);
 
 let table = [];
-let player1hand = []
+let player1hand = [];
 
 function newGame(){
     resetDeck();
@@ -11,14 +11,12 @@ function newGame(){
     $.ajax({
         type: "GET",
         url: "/draw/5",
-        dataType: "json",
         success: function(result){
             let tableCards = "";
             for(let i in result){
                 table.push(result[i]);
                 tableCards += result[i]["name"] + " ";
             }
-            console.log(table);
             $("#table").html(tableCards)
         }
     });
@@ -26,14 +24,12 @@ function newGame(){
     $.ajax({
         type: "GET",
         url: "/draw/2",
-        dataType: "json",
         success: function(result){
             let player1cards = "";
             for(let i in result){
                 player1hand.push(result[i]);
                 player1cards += result[i]["name"] + " ";
             }
-            console.log(player1hand);
             $("#player1").html(player1cards);
         }
     });
@@ -41,11 +37,9 @@ function newGame(){
     $.ajax({
         type: "GET",
         url: "/draw/2",
-        dataType: "json",
         success: function(result){
             let player2cards = "";
             for(let i in result){
-                console.log(result[i]);
                 player2cards += result[i]["name"] + " ";
             }
             $("#player2").html(player2cards)
@@ -88,11 +82,12 @@ function resetDeck(){
 function rank(cards){
     $.ajax({
         type: "POST",
-        dataType: "json",
         url: "/ranking",
         data: {cards: cards},
         success: function(result){
             console.log(result);
         }
     });
+    player1hand = [];
+    table = [];
 }

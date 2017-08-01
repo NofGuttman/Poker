@@ -1,6 +1,6 @@
 //To do: add highest cards except for the rank
 
-let example = [{"value":9,"shape":"Diamonds","name":"9D"},{"value":2,"shape":"Clubs","name":"2C"},{"value":8,"shape":"Hearts","name":"8H"},{"value":7,"shape":"Spades","name":"7S"},{"value":10,"shape":"Hearts","name":"10H"},{"value":6,"shape":"Hearts","name":"6H"},{"value":12,"shape":"Diamonds","name":"QD"}]
+let example = [{"value":6,"shape":"Diamonds","name":"9D"},{"value":7,"shape":"Clubs","name":"2C"},{"value":8,"shape":"Hearts","name":"8H"},{"value":11,"shape":"Spades","name":"7S"},{"value":11,"shape":"Hearts","name":"10H"},{"value":10,"shape":"Hearts","name":"6H"},{"value":12,"shape":"Diamonds","name":"QD"}]
 
 //=================================================is=Straight=Flush============================================
 
@@ -341,6 +341,9 @@ function isNothing(cards){
 //==================================================================================================================
 
 function showMeWhatYouGot(cards){
+    
+    for(let i in cards){ cards[i]["value"] = +cards[i]["value"] } // Normalize numbers from string to int ( "12" ==> 12 )
+    
     if(isStraightFlush(cards)) return isStraightFlush(cards);   // [8, highest card]
     if(isFourOfaKind(cards)) return isFourOfaKind(cards);       // [7, Foursome, highest card]
     if(isFullHouse(cards)) return isFullHouse(cards);           // [6, Threesome, Pair]
