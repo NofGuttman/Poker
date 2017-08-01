@@ -328,6 +328,9 @@ function isNothing(cards){
     for(let i in cards){
         numList.push(cards[i]["value"]);
     }
+    if(numList.includes(1)){
+        numList.push(14);
+    }
     let sortedNumList = numList.sort(function(a, b){return a-b});
     for(let i = 0; i < 5; i++){
         result.push(sortedNumList.pop());
@@ -346,7 +349,7 @@ function showMeWhatYouGot(cards){
     if(isThreeOfaKind(cards)) return isThreeOfaKind(cards);     // [3, Threesome, highest cards...]
     if(isTwoPairs(cards)) return isTwoPairs(cards);             // [2, Higher pair, Lower pair, Highest card]
     if(isOnePair(cards)) return isOnePair(cards);               // [1, Pair, highest cards...]
-    return isNothing(cards);                                    // [0, highest cards...] //FIX 1 ==> 14
+    return isNothing(cards);                                    // [0, highest cards...]
 }
 
 //==================================================================================================================
