@@ -1,13 +1,20 @@
 $("#shuffleDeck").click(shuffle);
 $("#resetDeck").click(resetDeck);
 $("#newGame").click(newGame);
+$("#showRank").click(showRank);
 
 let table = [];
 let player1hand = [];
+let player2hand = [];
 
 function newGame(){
+    player1hand = [];
+    player2hand = [];
+    table = [];
     resetDeck();
     shuffle();
+    $("#player1rank").html("");
+    $("#player2rank").html("");
     $.ajax({
         type: "GET",
         url: "/draw/5",
@@ -40,6 +47,7 @@ function newGame(){
         success: function(result){
             let player2cards = "";
             for(let i in result){
+                player2hand.push(result[i]);
                 player2cards += result[i]["name"] + " ";
             }
             $("#player2").html(player2cards)
@@ -48,7 +56,6 @@ function newGame(){
 }
 
 $("#showDeck").click(function(){
-    rank(player1hand.concat(table));
     $.ajax({
         type: "GET",
         url: "/showDeck",
@@ -57,6 +64,11 @@ $("#showDeck").click(function(){
         }
     })
 });
+
+function showRank(){
+    rank("player1rank",player1hand.concat(table));
+    rank("player2rank",player2hand.concat(table));
+}
 
 function shuffle(){
     $.ajax({
@@ -79,15 +91,14 @@ function resetDeck(){
     })
 }
 
-function rank(cards){
+function rank(player, cards){
     $.ajax({
         type: "POST",
         url: "/ranking",
         data: {cards: cards},
         success: function(result){
+            $("#" + player).html(result.join(", "));
             console.log(result);
         }
     });
-    player1hand = [];
-    table = [];
 }
