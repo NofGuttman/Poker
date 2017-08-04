@@ -1,0 +1,5 @@
+{
+	userName: "name-example",
+	hand: *two cards,*
+	rank: *rank of the cards in hand and on table*
+}

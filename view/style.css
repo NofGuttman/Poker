@@ -1,5 +1,5 @@
 /*
-.button {
+button {
     font-weight: bold;
     background-color: blue;
     border: solid 3px #0000b4;
@@ -8,6 +8,10 @@
     border-radius: 5px;
 }
 */
+
+body {
+    font-family: sans-serif;
+}
 
 .player {
     float:left;
