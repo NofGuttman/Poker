@@ -26,24 +26,4 @@ function winner(players){
     return toCheck;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-let example = [
-    {"userName": "player1", "rank": [4, 10]},
-    {"userName": "player2", "rank": [2, 13, 9, 8, 4]},
-    {"userName": "player3", "rank": [4, 10]}
-]
-
-
-console.log(winner(example)); // output ==> ["player3"]
-
 module.exports = winner;
