@@ -16,7 +16,7 @@ app.use(express.static('view'));
 app.use(bodyParser.urlencoded({extended: true}));
 
 app.get('/', function(req, res){
-    res.sendFile(__dirname + '/view/index.html');
+    res.sendFile(__dirname + '/view/index2.html');
 });
 
 app.get('/getDeck', function(req, res){
