@@ -3,10 +3,20 @@ body {
 }
 
 .area {
+    position: absolute;
     border: 1px solid grey;
     border-radius: 5px;
     padding: 5px;
     margin: 5px;
     width: 400px;
+}
+
+.player {
     background-color: azure;
+}
+
+#table {
+    top: 100px;
+    left: 200px;
+    background-color: lawngreen;
 }
