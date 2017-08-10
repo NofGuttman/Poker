@@ -1,21 +1,21 @@
 let shuffle = require('./shuffle');
 let deck = require('./deck');
 
+let shuffledDeck = shuffle(deck());
+let players = [];
 
-function distributeCardsToPlayers(playersList){
-    let shuffledDeck = shuffle(deck());
-    let players = []
-    for(let i in playersList){
+function distributeCardsToPlayers(NamesList, players, deck){
+    for(let i in NamesList){
         players.push({
-            userName: playersList[i],
+            userName: NamesList[i],
             hand: [shuffledDeck.pop(), shuffledDeck.pop()]
         });
     }
-    return players
 }
 
-let players = distributeCardsToPlayers(["Dudi", "Rotem", "Kobi", "Beni"]);
+distributeCardsToPlayers(["Dudi", "Rotem", "Kobi", "Beni"],  players, shuffledDeck);
 
 for(let i in players){
     console.log(players[i]);
 }
+console.log(shuffledDeck.length)
