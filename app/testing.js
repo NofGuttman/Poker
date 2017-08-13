@@ -6,14 +6,17 @@ let ranking = require('./ranking');
 let winner = require('./winner');
 
 let shuffledDeck = shuffle(deck());
-let playersNameList = ["Kobi", "Dan", "Mika", "Shani"];
-let players = [];
+let players = [
+    {userName: "Player1", money: 2000},
+    {userName: "Player2", money: 3200},
+    {userName: "Player3", money: 12000}
+]
 let gameTable = [];
 
 //console.log(players);
 //console.log(gameTable);
 
-distributeCardsToPlayers(playersNameList, players, shuffledDeck);
+distributeCardsToPlayers(players, shuffledDeck);
 
 //console.log(players);
 //console.log(gameTable);
@@ -36,5 +39,6 @@ for(let i in players){
     players[i].rank = ranking(players[i].hand.concat(gameTable))
 }
 
+console.log(gameTable)
 console.log(players)
 console.log(winner(players))

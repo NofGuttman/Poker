@@ -1,9 +1,6 @@
-function distributeCardsToPlayers(NamesList, players, deck){
-    for(let i in NamesList){
-        players.push({
-            userName: NamesList[i],
-            hand: [deck.pop(), deck.pop()]
-        });
+function distributeCardsToPlayers(players, deck){
+    for(let i in players){
+        players[i].hand = [deck.pop(), deck.pop()];
     }
 }
 
