@@ -1,5 +1,6 @@
 {
 	userName: "name-example",
-	hand: *two cards,*
+	hand: *two cards*,
+	money: Number,
 	rank: *rank of the cards in hand and on table*
 }
