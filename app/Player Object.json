@@ -1,0 +1,9 @@
+{
+	userName: "PlayerName",
+	hand: [{card1},{card2}],
+	money: 50000,
+    goodToGo: false,
+    call: 200,
+    selfBid: 0,
+	rank: ["Ranking ([4, 10])"]
+}
