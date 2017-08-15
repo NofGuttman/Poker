@@ -1,13 +1,15 @@
 let playersInThisRound = [
-    {userName: "Player1", goodToGo: false, money: 1000, bidOn: 0},
-    {userName: "Player2", goodToGo: false, money: 2000, bidOn: 0},
-    {userName: "Player3", goodToGo: false, money: 3000, bidOn: 0}
+    {userName: "Player1", goodToGo: false, money: 10000, call: 0, selfBid: 0},
+    {userName: "Player2", goodToGo: false, money: 20000, call: 0, selfBid: 0},
+    {userName: "Player3", goodToGo: false, money: 30000, call: 0, selfBid: 0}
 ];
 
-function bid(playerName, action, players, bidValue){
-    let relevantPlayer = {};
+const player1 = {userName: "Player1"}
+
+function bid(action, player, players, bidValue){
+    let relevantPlayer
     for(let i in players){
-        if(players[i].userName == playerName){
+        if(players[i].userName === player.userName){
             relevantPlayer = players[i];
         }
     }
@@ -15,18 +17,31 @@ function bid(playerName, action, players, bidValue){
         case "CHECK":
             relevantPlayer.goodToGo = true;
             break;
-        case "FOLD":
-            
-            break;
-        case "RAISE":
-            
-            break;
+        
         case "CALL":
+            relevantPlayer.money -= relevantPlayer.call;
+            [relevantPlayer.selfBid, relevantPlayer.call] = [relevantPlayer.call, 0];
             relevantPlayer.goodToGo = true;
+            break;
+        
+        case "RAISE":
+            for(let i in players){
+                if(players[i] === relevantPlayer){
+                    continue;
+                }
+                players[i].goodToGo = false;
+                players[i].call += bidValue;
+            }
+            relevantPlayer.goodToGo = true;
+            [relevantPlayer.selfBid, relevantPlayer.call] = [relevantPlayer.call + bidValue, 0];
+            relevantPlayer.money -= relevantPlayer.selfBid;
+            break;
+        
+        case "FOLD":
             break;
     }
 }
 
-bid("Player3", "CHECK", playersInThisRound, 100);
-
+bid("RAISE", player1, playersInThisRound, 100);
+            
 console.log(playersInThisRound);
